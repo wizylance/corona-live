@@ -1,0 +1,7 @@
+{
+  "name": "coronaLive",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

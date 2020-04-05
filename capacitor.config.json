@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "coronaLive",
+  "appName": "corona-live",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

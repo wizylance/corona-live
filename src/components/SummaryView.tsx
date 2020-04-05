@@ -1,6 +1,7 @@
 import React from "react";
 import { IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
 import { SummaryData } from "../services/DataService";
+import { numberWithCommas } from "../utils/formatting";
 import "./SummaryView.css";
 
 type SummaryViewProps = {
@@ -14,7 +15,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="warning">
-              <div className="number">{data.confirmed}</div>
+              <div className="number">{numberWithCommas(data.confirmed)}</div>
             </IonText>
             <IonText color="medium">
               <div className="key">Confirmed</div>
@@ -24,7 +25,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="danger">
-              <div className="number">{data.dead}</div>
+              <div className="number">{numberWithCommas(data.dead)}</div>
             </IonText>
             <IonText color="medium">
               <div className="key">Dead</div>
@@ -34,7 +35,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="success">
-              <div className="number">{data.recovered}</div>
+              <div className="number">{numberWithCommas(data.recovered)}</div>
             </IonText>
             <IonText color="medium">
               <div className="key">Recovered</div>

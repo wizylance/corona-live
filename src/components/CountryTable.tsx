@@ -1,6 +1,7 @@
 import React from "react";
 import { IonGrid, IonRow, IonCol } from "@ionic/react";
 import { ByCountryData } from "../services/DataService";
+import { numberWithCommas } from "../utils/formatting";
 import "./CountryTable.css";
 
 type CountryTableProps = {
@@ -32,9 +33,9 @@ type ItemRowProps = {
 const ItemRow: React.FC<ItemRowProps> = ({ item }) => (
   <IonRow className="item-row">
     <IonCol>{item.location}</IonCol>
-    <IonCol>{item.confirmed}</IonCol>
-    <IonCol>{item.dead}</IonCol>
-    <IonCol>{item.recovered}</IonCol>
+    <IonCol>{numberWithCommas(item.confirmed)}</IonCol>
+    <IonCol>{numberWithCommas(item.dead)}</IonCol>
+    <IonCol>{numberWithCommas(item.recovered)}</IonCol>
   </IonRow>
 );
 

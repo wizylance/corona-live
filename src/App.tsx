@@ -14,7 +14,7 @@ import { Provider } from "mobx-react";
 import { create } from "mobx-persist";
 import { ellipse, square, triangle } from "ionicons/icons";
 
-import { DataStore } from "./services/DataService";
+import { FirebaseStore } from "./services/FirebaseService";
 
 import TabOverview from "./pages/TabOverview";
 import TabCountries from "./pages/TabCountries";
@@ -41,7 +41,7 @@ import "./theme/variables.css";
 
 const App: React.FC = () => {
   const hydrate = create({});
-  const dataStore = new DataStore();
+  const dataStore = new FirebaseStore();
 
   hydrate("dataStore", dataStore);
 

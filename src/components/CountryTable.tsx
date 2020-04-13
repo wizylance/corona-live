@@ -1,18 +1,25 @@
 import React from "react";
 import { IonGrid, IonRow, IonCol } from "@ionic/react";
-import { ByCountryData } from "../services/DataService";
+import { ByCountries, ByCountryData } from "../services/FirebaseService";
 import { numberWithCommas } from "../utils/formatting";
 import "./CountryTable.css";
 
 type CountryTableProps = {
-  data: ByCountryData[];
+  data: ByCountries;
 };
 
 const CountryTable: React.FC<CountryTableProps> = ({ data }) => {
+  const itemRows = [];
+  if (data) {
+    for (let key in data) {
+      let item = data[key];
+      itemRows.push(<ItemRow key={item.Country} item={item} />)
+    }
+  }
   return (
     <IonGrid>
       <HeadRow />
-      {data && data.map((item) => <ItemRow key={item.location} item={item} />)}
+      {itemRows}
     </IonGrid>
   );
 };
@@ -32,10 +39,10 @@ type ItemRowProps = {
 
 const ItemRow: React.FC<ItemRowProps> = ({ item }) => (
   <IonRow className="item-row">
-    <IonCol>{item.location}</IonCol>
-    <IonCol>{numberWithCommas(item.confirmed)}</IonCol>
-    <IonCol>{numberWithCommas(item.dead)}</IonCol>
-    <IonCol>{numberWithCommas(item.recovered)}</IonCol>
+    <IonCol>{item.Country}</IonCol>
+    <IonCol>{numberWithCommas(item.TotalConfirmed)}</IonCol>
+    <IonCol>{numberWithCommas(item.TotalDeaths)}</IonCol>
+    <IonCol>{numberWithCommas(item.TotalRecovered)}</IonCol>
   </IonRow>
 );
 

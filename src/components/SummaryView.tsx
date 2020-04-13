@@ -1,6 +1,6 @@
 import React from "react";
 import { IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
-import { SummaryData } from "../services/DataService";
+import { SummaryData } from "../services/FirebaseService";
 import { numberWithCommas } from "../utils/formatting";
 import "./SummaryView.css";
 
@@ -15,7 +15,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="warning">
-              <div className="number">{numberWithCommas(data.confirmed)}</div>
+              <div className="number">{numberWithCommas(data.NewConfirmed)}</div>
             </IonText>
             <IonText color="medium">
               <div className="key">Confirmed</div>
@@ -25,7 +25,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="danger">
-              <div className="number">{numberWithCommas(data.dead)}</div>
+              <div className="number">{numberWithCommas(data.NewDeaths)}</div>
             </IonText>
             <IonText color="medium">
               <div className="key">Dead</div>
@@ -35,7 +35,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="success">
-              <div className="number">{numberWithCommas(data.recovered)}</div>
+              <div className="number">{numberWithCommas(data.NewRecovered)}</div>
             </IonText>
             <IonText color="medium">
               <div className="key">Recovered</div>
@@ -46,37 +46,31 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
       <IonRow>
         <IonCol>
           <div className="figure">
-            <IonText>
-              <div className="number">
-                {data.affectedCountries}/{data.totalCountries}
-              </div>
+            <IonText color="warning">
+              <div className="number">{numberWithCommas(data.TotalConfirmed)}</div>
             </IonText>
             <IonText color="medium">
-              <div className="key">Countries</div>
+              <div className="key">Confirmed</div>
             </IonText>
           </div>
         </IonCol>
         <IonCol>
           <div className="figure">
-            <IonText>
-              <div className="number">
-                {(data.fatalityRate * 100).toFixed(2)}%
-              </div>
+            <IonText color="danger">
+              <div className="number">{numberWithCommas(data.TotalDeaths)}</div>
             </IonText>
             <IonText color="medium">
-              <div className="key">Fatality Rate</div>
+              <div className="key">Dead</div>
             </IonText>
           </div>
         </IonCol>
         <IonCol>
           <div className="figure">
-            <IonText>
-              <div className="number">
-                {(data.recoveryRate * 100).toFixed(2)}%
-              </div>
+            <IonText color="success">
+              <div className="number">{numberWithCommas(data.TotalRecovered)}</div>
             </IonText>
             <IonText color="medium">
-              <div className="key">Recovery Rate</div>
+              <div className="key">Recovered</div>
             </IonText>
           </div>
         </IonCol>

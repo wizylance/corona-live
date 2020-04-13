@@ -11,8 +11,16 @@ type CountryTableProps = {
 const CountryTable: React.FC<CountryTableProps> = ({ data }) => {
   return (
     <IonGrid>
+      <IonRow>
+        <IonCol>
+          <div className="ion-text-center">
+            <h2>By Countries</h2>
+          </div>
+        </IonCol>
+      </IonRow>
       <HeadRow />
-      {data && Object.keys(data).map(key => <ItemRow key={key} item={data[key]} />)}
+      {data &&
+        Object.keys(data).map((key) => <ItemRow key={key} item={data[key]} />)}
     </IonGrid>
   );
 };

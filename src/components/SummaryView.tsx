@@ -13,9 +13,25 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
     <IonGrid>
       <IonRow>
         <IonCol>
+          <div className="ion-text-center">
+            <h2>Global Summary</h2>
+          </div>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol>
+          <div className="ion-text-center">
+            <h3>TODAY</h3>
+          </div>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol>
           <div className="figure">
             <IonText color="warning">
-              <div className="number">{numberWithCommas(data.NewConfirmed)}</div>
+              <div className="number">
+                {numberWithCommas(data.NewConfirmed)}
+              </div>
             </IonText>
             <IonText color="medium">
               <div className="key">Confirmed</div>
@@ -35,7 +51,9 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="success">
-              <div className="number">{numberWithCommas(data.NewRecovered)}</div>
+              <div className="number">
+                {numberWithCommas(data.NewRecovered)}
+              </div>
             </IonText>
             <IonText color="medium">
               <div className="key">Recovered</div>
@@ -45,9 +63,18 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
       </IonRow>
       <IonRow>
         <IonCol>
+          <div className="ion-text-center">
+            <h3>ALL-TIME</h3>
+          </div>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol>
           <div className="figure">
             <IonText color="warning">
-              <div className="number">{numberWithCommas(data.TotalConfirmed)}</div>
+              <div className="number">
+                {numberWithCommas(data.TotalConfirmed)}
+              </div>
             </IonText>
             <IonText color="medium">
               <div className="key">Confirmed</div>
@@ -67,10 +94,42 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         <IonCol>
           <div className="figure">
             <IonText color="success">
-              <div className="number">{numberWithCommas(data.TotalRecovered)}</div>
+              <div className="number">
+                {numberWithCommas(data.TotalRecovered)}
+              </div>
             </IonText>
             <IonText color="medium">
               <div className="key">Recovered</div>
+            </IonText>
+          </div>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol>
+          <div className="figure">
+            <IonText color="warning">
+              <div className="number">
+                {`${((data.TotalDeaths / data.TotalConfirmed) * 100).toFixed(
+                  2
+                )}%`}
+              </div>
+            </IonText>
+            <IonText color="medium">
+              <div className="key">Fatality Rate</div>
+            </IonText>
+          </div>
+        </IonCol>
+        <IonCol>
+          <div className="figure">
+            <IonText color="warning">
+              <div className="number">
+                {`${((data.TotalRecovered / data.TotalConfirmed) * 100).toFixed(
+                  2
+                )}%`}
+              </div>
+            </IonText>
+            <IonText color="medium">
+              <div className="key">Recovery Rate</div>
             </IonText>
           </div>
         </IonCol>

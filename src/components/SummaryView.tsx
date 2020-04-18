@@ -121,7 +121,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data }) => {
         </IonCol>
         <IonCol>
           <div className="figure">
-            <IonText color="warning">
+            <IonText color="success">
               <div className="number">
                 {`${((data.TotalRecovered / data.TotalConfirmed) * 100).toFixed(
                   2

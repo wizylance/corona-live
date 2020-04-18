@@ -1,7 +1,7 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 import { persist } from "mobx-persist";
 // import { db } from '../components/firebase/firebase';
-import { db } from '../components/firebase';
+import { db } from "../components/firebase";
 
 export type SummaryData = {
   NewConfirmed: number;
@@ -23,13 +23,18 @@ export type ByCountryData = {
   TotalConfirmed: number;
   TotalDeaths: number;
   TotalRecovered: number;
-}
+};
+
+export type ByShortCountryData = {
+  Country: string;
+  CountryCode: string;
+};
+
 export type ByCountries = {
-  [key: string]: ByCountryData
-}
+  [key: string]: ByCountryData;
+};
 
 export class FirebaseStore {
-
   @persist("object")
   @observable
   byCountries: ByCountries = {};
@@ -44,6 +49,9 @@ export class FirebaseStore {
     TotalDeaths: 0,
     TotalRecovered: 0,
   };
+
+  @observable
+  myCountryCode: string = "VN";
 
   fetchByCountries = function (this: FirebaseStore) {
     try {
@@ -69,14 +77,43 @@ export class FirebaseStore {
     }
   };
 
+  @computed get sortedCountryData(): ByCountryData[] {
+    const sortFunc = (first: ByCountryData, second: ByCountryData): number => {
+      const diffConfirmed = first.TotalConfirmed - second.TotalConfirmed;
+      if (diffConfirmed !== 0) return diffConfirmed;
+      const diffDead = first.TotalDeaths - second.TotalDeaths;
+      if (diffDead !== 0) return diffDead;
+      const diffRecovered = first.TotalRecovered - second.TotalRecovered;
+      if (diffRecovered !== 0) return diffRecovered;
+      if (first.Country > second.Country) return 1;
+      if (first.Country < second.Country) return -1;
+      return 0;
+    };
+    let arrays = Object.keys(this.byCountries).map(
+      (key) => this.byCountries[key]
+    );
+    return arrays.sort(sortFunc).reverse();
+  }
+
+  @computed get shortCountryData(): ByShortCountryData[] {
+    let arrays = Object.keys(this.byCountries).map((key) => ({
+      CountryCode: this.byCountries[key].CountryCode,
+      Country: this.byCountries[key].Country,
+    }));
+    return arrays;
+  }
+
   @action setSummaryData = (sumary: SummaryData) => {
     this.summaryData = sumary;
-  }
+  };
 
   @action setAllCountries = (allCountries: ByCountries) => {
     this.byCountries = allCountries;
-  }
+  };
 
+  @action setMyCountryCode = (code: string) => {
+    this.myCountryCode = code;
+  };
 }
 
 export default FirebaseStore;

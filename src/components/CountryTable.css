@@ -1,3 +1,46 @@
 .head-row > ion-col {
   font-weight: bold;
 }
+.table-grid {
+  display: flex;
+  flex-direction: column;
+}
+.table-grid > icon-row {
+  align-items: center;
+}
+
+.table-grid > .item-row {
+  align-items: center;
+  order: 2;
+}
+
+.table-grid > .head-row,
+.table-grid > .title-row {
+  align-items: center;
+  order: 0;
+}
+
+.table-grid > .country-row {
+  align-items: center;
+  order: 1;
+  border: 1px solid #333;
+}
+.table-grid > .country-row > icon-col::first-child > span {
+  font-size: 4em;
+}
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1200px) {
+  .table-grid {
+    margin: 0 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .table-grid > .head-row {
+    font-size: 0.6em;
+  }
+}

@@ -1,0 +1,18 @@
+.figure {
+  text-align: center;
+  padding: 10px;
+}
+
+.figure .number {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.figure .key {
+  font-size: 14px;
+  font-weight: medium;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop */
+}

@@ -10,6 +10,7 @@ import {
 } from "@ionic/react";
 import SummaryView from "../components/SummaryView";
 import CountryTable from "../components/CountryTable";
+import SelectLanguage from "../components/SelectLanguage";
 import { FirebaseStore } from "../services/FirebaseService";
 import "./TabOverview.css";
 
@@ -18,7 +19,12 @@ type OverviewProps = {
 };
 
 const TabOverview: React.FC<OverviewProps> = ({ dataStore }) => {
-  const { summaryData, byCountries } = dataStore;
+  const {
+    summaryData,
+    sortedCountryData,
+    shortCountryData,
+    myCountryCode,
+  } = dataStore;
 
   useIonViewDidEnter(() => {
     dataStore.fetchByCountries();
@@ -28,10 +34,15 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore }) => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="header">
         <IonToolbar>
           <IonTitle>COVID-19</IonTitle>
         </IonToolbar>
+        <SelectLanguage
+          myCountryCode={myCountryCode}
+          setMyCountryCode={dataStore.setMyCountryCode}
+          data={shortCountryData}
+        />
       </IonHeader>
       <IonContent>
         <IonHeader collapse="condense">
@@ -40,7 +51,7 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore }) => {
           </IonToolbar>
         </IonHeader>
         <SummaryView data={summaryData} />
-        <CountryTable data={byCountries} />
+        <CountryTable data={sortedCountryData} myCountryCode={myCountryCode} />
       </IonContent>
     </IonPage>
   );

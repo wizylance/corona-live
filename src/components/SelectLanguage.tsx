@@ -1,7 +1,7 @@
 import React from "react";
 import { IonSelect, IonSelectOption } from "@ionic/react";
 import CountryFlag from "react-country-flag";
-import { ByShortCountryData } from "../services/FirebaseService";
+import { ByShortCountryData } from "../store/firebase/FirebaseStore";
 
 import "./SelectLanguage.css";
 

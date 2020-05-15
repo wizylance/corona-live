@@ -4,19 +4,17 @@ import {
   IonHeader,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar,
 } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
+import Header from "../components/Header";
+
 import "./TabCountries.css";
 
 const TabCountries: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Countries</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title="Countries" />
       <IonContent>
         <IonHeader collapse="condense">
           <IonToolbar>

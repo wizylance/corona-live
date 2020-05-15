@@ -10,40 +10,28 @@ import {
 } from "@ionic/react";
 import SummaryView from "../components/SummaryView";
 import CountryTable from "../components/CountryTable";
-import SelectLanguage from "../components/SelectLanguage";
-import { FirebaseStore } from "../services/FirebaseService";
+import Header from "../components/Header";
+
+import { FirebaseStore } from "../store/firebase/FirebaseStore";
+import { AppState } from "../store/app/AppState";
 import "./TabOverview.css";
 
 type OverviewProps = {
   dataStore: FirebaseStore;
+  appState: AppState;
 };
 
-const TabOverview: React.FC<OverviewProps> = ({ dataStore }) => {
-  const {
-    summaryData,
-    sortedCountryData,
-    shortCountryData,
-    myCountryCode,
-  } = dataStore;
+const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
+  const { summaryData, sortedCountryData, myCountryCode } = dataStore;
 
   useIonViewDidEnter(() => {
-    dataStore.fetchByCountries();
     dataStore.fetchSummary();
     dataStore.syncSummary();
   });
 
   return (
     <IonPage>
-      <IonHeader className="header">
-        <IonToolbar>
-          <IonTitle>COVID-19</IonTitle>
-        </IonToolbar>
-        <SelectLanguage
-          myCountryCode={myCountryCode}
-          setMyCountryCode={dataStore.setMyCountryCode}
-          data={shortCountryData}
-        />
-      </IonHeader>
+      <Header title="COVID-19" />
       <IonContent>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -57,4 +45,4 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore }) => {
   );
 };
 
-export default inject("dataStore")(observer(TabOverview));
+export default inject("dataStore", "appState")(observer(TabOverview));

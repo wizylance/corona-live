@@ -1,7 +1,7 @@
 import { observable, action, computed } from "mobx";
 import { persist } from "mobx-persist";
 // import { db } from '../components/firebase/firebase';
-import { db } from "../components/firebase";
+import { db } from "../../services/firebase";
 
 export type SummaryData = {
   NewConfirmed: number;
@@ -57,7 +57,7 @@ export class FirebaseStore {
     try {
       db.getAllCountries(this.setAllCountries);
     } catch (err) {
-      console.log("Failed to fetch contrys data!", err);
+      console.log("Failed to fetch countries data!", err);
     }
   };
 

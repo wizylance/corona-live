@@ -1,6 +1,6 @@
 import React from "react";
 import { IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
-import { SummaryData } from "../services/FirebaseService";
+import { SummaryData } from "../store/firebase/FirebaseStore";
 import { numberWithCommas } from "../utils/formatting";
 import "./SummaryView.css";
 

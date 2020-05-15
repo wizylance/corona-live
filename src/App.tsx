@@ -14,7 +14,8 @@ import { Provider } from "mobx-react";
 import { create } from "mobx-persist";
 // import { ellipse, square, triangle } from "ionicons/icons";
 
-import { FirebaseStore } from "./services/FirebaseService";
+import { FirebaseStore } from "./store/firebase/FirebaseStore";
+import { AppState } from "./store/app/AppState";
 
 import TabOverview from "./pages/TabOverview";
 import TabCountries from "./pages/TabCountries";
@@ -42,12 +43,13 @@ import "./theme/variables.css";
 const App: React.FC = () => {
   const hydrate = create({});
   const dataStore = new FirebaseStore();
+  const appState = new AppState();
 
   hydrate("dataStore", dataStore);
 
   return (
     <IonApp>
-      <Provider dataStore={dataStore}>
+      <Provider dataStore={dataStore} appState={appState}>
         <IonReactRouter>
           <IonRouterOutlet>
             <Route path="/overview" component={TabOverview} exact={true} />
@@ -58,6 +60,7 @@ const App: React.FC = () => {
               render={() => <Redirect to="/overview" />}
               exact={true}
             />
+            <Redirect to="/overview" />
           </IonRouterOutlet>
         </IonReactRouter>
       </Provider>

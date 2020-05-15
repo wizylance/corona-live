@@ -1,7 +1,7 @@
 import React from "react";
 import CountryFlag from "react-country-flag";
 import { IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
-import { ByCountryData } from "../services/FirebaseService";
+import { ByCountryData } from "../store/firebase/FirebaseStore";
 import { numberWithCommas } from "../utils/formatting";
 import "./CountryTable.css";
 

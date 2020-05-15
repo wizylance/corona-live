@@ -12,9 +12,16 @@
   margin-top: 20px;
 }
 
-.summary-page.today,
-.summary-page.content {
+.summary-page.today {
   margin-bottom: 50px;
+}
+
+.summary-page.content.today {
+  margin-bottom: 50px;
+}
+
+.summary-page.content.all-time {
+  margin-bottom: 20px;
 }
 
 .figure-summary .key {
@@ -45,13 +52,15 @@
   border-right-color: #ffffff;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 700px) {
   /* For desktop */
   .ion-text-center.today,
   .ion-text-center.all-time {
     font-size: 25px;
     font-weight: bold;
     height: 100%;
+    width: 100%;
+    min-width: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,17 +78,18 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 700px) {
   /* For mobile */
   .ion-text-center.today,
   .ion-text-center.all-time {
     font-size: 12px;
     font-weight: bold;
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
+    min-width: 80px;
     border-right: 2px solid;
   }
 

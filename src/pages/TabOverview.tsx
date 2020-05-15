@@ -27,7 +27,11 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
       <Header title="COVID-19" />
       <IonContent>
         <SummaryView data={summaryData} viewMode={appState.viewMode} />
-        <CountryTable data={sortedCountryData} myCountryCode={myCountryCode} />
+        <CountryTable
+          data={sortedCountryData}
+          myCountryCode={myCountryCode}
+          viewMode={appState.viewMode}
+        />
       </IonContent>
     </IonPage>
   );

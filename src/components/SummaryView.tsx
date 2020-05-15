@@ -21,7 +21,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data, viewMode }) => {
           </div>
         </IonCol>
       </IonRow>
-      <IonRow className="summary-page content">
+      <IonRow className="summary-page content today">
         <IonCol>
           <div className={`ion-text-center today ${viewMode}`}>TODAY</div>
         </IonCol>
@@ -60,7 +60,7 @@ const SummaryView: React.FC<SummaryViewProps> = ({ data, viewMode }) => {
           </div>
         </IonCol>
       </IonRow>
-      <IonRow className="summary-page content">
+      <IonRow className="summary-page content all-time">
         <IonCol>
           <div className={`ion-text-center all-time ${viewMode}`}>ALL-TIME</div>
         </IonCol>

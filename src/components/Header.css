@@ -3,8 +3,47 @@ ion-content ion-toolbar {
 }
 .header {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: center;
+  color: #000000;
+  background-color: #ffffff;
 }
+
+.header.darkmode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 .header > ion-select {
   width: 11em;
+}
+
+.header > .header-title {
+  text-transform: uppercase;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #808080;
+}
+
+.header::after {
+  background-image: unset;
+}
+
+.header > .custom-toolbar {
+  box-shadow: unset;
+}
+
+.header > .header-country-selection {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.header ion-toggle {
+  zoom: 0.7;
+  --handle-background: #ffffff;
+  --background: #cccccc;
 }

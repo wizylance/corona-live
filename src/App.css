@@ -1,0 +1,13 @@
+.app-style {
+  --ion-background-color: #ffffff;
+}
+
+.app-style.darkmode {
+  color: #ffffff;
+  --ion-background-color: #000000;
+}
+
+.ion-text-center {
+  /* color: #ffffff; */
+  /* font-size: 10px; */
+}

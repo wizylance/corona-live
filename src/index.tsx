@@ -3,10 +3,26 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { configure } from "mobx";
+import { Provider } from "mobx-react";
+import { FirebaseStore } from "./store/firebase/FirebaseStore";
+import { create } from "mobx-persist";
+
+import { AppState } from "./store/app/AppState";
 
 configure({ enforceActions: "always" }); // Mobx strict mode
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const hydrate = create({});
+const dataStore = new FirebaseStore();
+const appState = new AppState();
+
+hydrate("dataStore", dataStore);
+
+ReactDOM.render(
+  <Provider dataStore={dataStore} appState={appState}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

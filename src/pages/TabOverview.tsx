@@ -1,13 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  useIonViewDidEnter,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
 import SummaryView from "../components/SummaryView";
 import CountryTable from "../components/CountryTable";
 import Header from "../components/Header";
@@ -33,12 +26,7 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
     <IonPage>
       <Header title="COVID-19" />
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">COVID-19</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <SummaryView data={summaryData} />
+        <SummaryView data={summaryData} viewMode={appState.viewMode} />
         <CountryTable data={sortedCountryData} myCountryCode={myCountryCode} />
       </IonContent>
     </IonPage>

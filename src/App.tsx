@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 import {
   IonApp,
   IonRouterOutlet,
@@ -10,16 +11,12 @@ import {
   // IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Provider } from "mobx-react";
-import { create } from "mobx-persist";
 // import { ellipse, square, triangle } from "ionicons/icons";
-
-import { FirebaseStore } from "./store/firebase/FirebaseStore";
-import { AppState } from "./store/app/AppState";
 
 import TabOverview from "./pages/TabOverview";
 import TabCountries from "./pages/TabCountries";
 import TabMap from "./pages/TabMap";
+import { AppState, ViewMode } from "./store/app/AppState";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -38,34 +35,34 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import "./theme/variables.css";
+import "./App.css";
 
-const App: React.FC = () => {
-  const hydrate = create({});
-  const dataStore = new FirebaseStore();
-  const appState = new AppState();
+type AppProps = {
+  appState?: AppState;
+};
 
-  hydrate("dataStore", dataStore);
-
+const App: React.FC<AppProps> = ({ appState }) => {
   return (
-    <IonApp>
-      <Provider dataStore={dataStore} appState={appState}>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path="/overview" component={TabOverview} exact={true} />
-            <Route path="/countries" component={TabCountries} exact={true} />
-            <Route path="/map" component={TabMap} />
-            <Route
-              path="/"
-              render={() => <Redirect to="/overview" />}
-              exact={true}
-            />
-            <Redirect to="/overview" />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </Provider>
+    <IonApp
+      className={`app-style ${
+        appState?.viewMode === ViewMode.DARK_MODE ? "darkmode" : ""
+      }`}
+    >
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route path="/overview" component={TabOverview} exact={true} />
+          <Route path="/countries" component={TabCountries} exact={true} />
+          <Route path="/map" component={TabMap} />
+          <Route
+            path="/"
+            render={() => <Redirect to="/overview" />}
+            exact={true}
+          />
+          <Redirect to="/overview" />
+        </IonRouterOutlet>
+      </IonReactRouter>
     </IonApp>
   );
 };
 
-export default App;
+export default inject("appState")(observer(App));

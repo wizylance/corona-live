@@ -11,6 +11,12 @@ import { numberWithCommas } from "../utils/formatting";
 
 import "./CountryTable.css";
 
+type ItemRowProps = {
+  item: ByCountryData;
+  pinToTop: boolean;
+  className: string;
+};
+
 export const HeadRow: React.FC<{ viewMode: ViewMode }> = ({ viewMode }) => (
   <IonRow className={`head-row ${viewMode}`}>
     <IonCol className="location" size="3">
@@ -30,12 +36,6 @@ export const HeadRow: React.FC<{ viewMode: ViewMode }> = ({ viewMode }) => (
     </IonCol>
   </IonRow>
 );
-
-type ItemRowProps = {
-  item: ByCountryData;
-  pinToTop: boolean;
-  className: string;
-};
 
 export const ItemRow: React.FC<ItemRowProps> = ({
   item,

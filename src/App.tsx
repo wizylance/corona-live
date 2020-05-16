@@ -16,7 +16,7 @@ import { IonReactRouter } from "@ionic/react-router";
 import TabOverview from "./pages/TabOverview";
 import TabCountries from "./pages/TabCountries";
 import TabMap from "./pages/TabMap";
-import { AppState, ViewMode } from "./store/app/AppState";
+import { AppState } from "./store/app/AppState";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -43,7 +43,7 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({ appState }) => {
   return (
-    <IonApp className={`app-style ${appState?.viewMode}`}>
+    <IonApp className={`app-style ${appState!.viewMode}`}>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/overview" component={TabOverview} exact={true} />

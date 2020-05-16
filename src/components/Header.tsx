@@ -26,14 +26,10 @@ const Header: React.FC<HeaderProps> = ({ dataStore, appState, title }) => {
       ? ViewMode.LIGHT_MODE
       : ViewMode.DARK_MODE;
 
-    appState?.changeViewMode(viewMode);
+    appState!.changeViewMode(viewMode);
   };
   return (
-    <IonHeader
-      className={`header ${
-        appState?.viewMode === ViewMode.DARK_MODE ? "darkmode" : ""
-      }`}
-    >
+    <IonHeader className={`header ${appState!.viewMode}`}>
       <div className="header-title">{title}</div>
       <div className="header-country-selection">
         {dataStore?.shortCountryData ? (
@@ -45,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ dataStore, appState, title }) => {
         ) : null}
         <IonToggle
           color="dark"
-          checked={appState?.viewMode === ViewMode.LIGHT_MODE}
+          checked={appState!.viewMode === ViewMode.LIGHT_MODE}
           onIonChange={handleToggleMode}
           mode="ios"
         />

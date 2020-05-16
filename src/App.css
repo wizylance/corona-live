@@ -3,13 +3,8 @@
   --ion-border-color: #ffffff;
 }
 
-.app-style.darkmode {
+.app-style.DARK_MODE {
   color: #ffffff;
   --ion-background-color: #000000;
   --ion-border-color: #000000;
-}
-
-.ion-text-center {
-  /* color: #ffffff; */
-  /* font-size: 10px; */
 }

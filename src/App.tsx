@@ -43,11 +43,7 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({ appState }) => {
   return (
-    <IonApp
-      className={`app-style ${
-        appState?.viewMode === ViewMode.DARK_MODE ? "darkmode" : ""
-      }`}
-    >
+    <IonApp className={`app-style ${appState?.viewMode}`}>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/overview" component={TabOverview} exact={true} />

@@ -4,9 +4,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { configure } from "mobx";
 import { Provider } from "mobx-react";
-import { FirebaseStore } from "./store/firebase/FirebaseStore";
 import { create } from "mobx-persist";
 
+// MOBX
+import { FirebaseStore } from "./store/firebase/FirebaseStore";
 import { AppState } from "./store/app/AppState";
 
 configure({ enforceActions: "always" }); // Mobx strict mode

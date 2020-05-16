@@ -8,7 +8,7 @@ export enum ViewMode {
 
 export class AppState {
   @observable
-  viewMode: ViewMode = ViewMode.LIGHT_MODE;
+  viewMode: ViewMode = ViewMode.DARK_MODE;
 
   @action changeViewMode = (viewMode: ViewMode) => {
     this.viewMode = viewMode;

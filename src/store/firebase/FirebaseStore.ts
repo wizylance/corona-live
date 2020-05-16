@@ -78,6 +78,10 @@ export class FirebaseStore {
   };
 
   @computed get sortedCountryData(): ByCountryData[] {
+    let countriesData: ByCountryData[] = [];
+    const byCountriesKeys = Object.keys(this.byCountries);
+    const byCountriesKeysLength = byCountriesKeys.length;
+
     const sortFunc = (first: ByCountryData, second: ByCountryData): number => {
       const diffConfirmed = first.TotalConfirmed - second.TotalConfirmed;
       if (diffConfirmed !== 0) return diffConfirmed;
@@ -89,10 +93,18 @@ export class FirebaseStore {
       if (first.Country < second.Country) return -1;
       return 0;
     };
-    let arrays = Object.keys(this.byCountries).map(
-      (key) => this.byCountries[key]
-    );
-    return arrays.sort(sortFunc).reverse();
+
+    for (let i = 0; i < byCountriesKeysLength; i++) {
+      if (byCountriesKeys[i] !== this.myCountryCode) {
+        countriesData.push(this.byCountries[byCountriesKeys[i]]);
+      }
+    }
+
+    return countriesData.sort(sortFunc).reverse();
+  }
+
+  @computed get myCountryData(): ByCountryData {
+    return this.byCountries[this.myCountryCode];
   }
 
   @computed get shortCountryData(): ByShortCountryData[] {

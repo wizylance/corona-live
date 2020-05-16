@@ -1,11 +1,9 @@
-ion-content ion-toolbar {
-  --background: translucent;
-}
 .header {
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
   color: #000000;
+  height: 47px;
   background-color: #ffffff;
 }
 

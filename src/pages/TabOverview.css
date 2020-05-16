@@ -1,3 +1,19 @@
-ion-content ion-toolbar {
-  --background: translucent;
+.tab-overview.content {
+  height: calc(100% - 47px);
+  /* position: relative; */
+  /* top: -2px; */
+  overflow-y: scroll;
+}
+
+.tab-overview.content.LIGHT_MODE {
+  background-color: #ffffff;
+}
+
+.tab-overview.content.DARK_MODE {
+  background-color: #000000;
+}
+
+.tab-overview.content .loading-wrapper {
+  padding: 40px;
+  position: relative;
 }

@@ -11,13 +11,11 @@
 
 .table-grid > .item-row {
   align-items: center;
-  order: 2;
 }
 
 .table-grid > .head-row,
 .table-grid > .title-row {
   align-items: center;
-  order: 0;
 }
 
 .table-grid > .head-row.desktop {
@@ -110,7 +108,6 @@
 
 .table-grid > .country-row {
   align-items: center;
-  order: 1;
   border: 1px solid #333;
 }
 .table-grid > .country-row > icon-col::first-child > span {

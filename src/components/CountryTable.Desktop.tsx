@@ -1,41 +1,17 @@
 import React from "react";
 import CountryFlag from "react-country-flag";
 import { IonRow, IonCol, IonText } from "@ionic/react";
+
+// MOBX
 import { ByCountryData } from "../store/firebase/FirebaseStore";
 import { ViewMode } from "../store/app/AppState";
+
+// UTILS
 import { numberWithCommas } from "../utils/formatting";
-import { CountryTableProps } from "./CountryTable";
+
 import "./CountryTable.css";
 
-const CountryTable: React.FC<CountryTableProps> = ({
-  data,
-  myCountryCode,
-  viewMode,
-}) => {
-  return (
-    <>
-      <HeadRow viewMode={viewMode} />
-      {data &&
-        data.map((item) => {
-          const isUserCountry = item && item.CountryCode === myCountryCode;
-          return (
-            <ItemRow
-              className={
-                isUserCountry
-                  ? `country-row ${viewMode}`
-                  : `item-row ${viewMode}`
-              }
-              key={item.CountryCode}
-              item={item}
-              pinToTop={isUserCountry}
-            />
-          );
-        })}
-    </>
-  );
-};
-
-const HeadRow: React.FC<{ viewMode: ViewMode }> = ({ viewMode }) => (
+export const HeadRow: React.FC<{ viewMode: ViewMode }> = ({ viewMode }) => (
   <IonRow className={`head-row desktop ${viewMode}`}>
     <IonCol className="location" size="3">
       Location
@@ -67,7 +43,11 @@ type ItemRowProps = {
   className: string;
 };
 
-const ItemRow: React.FC<ItemRowProps> = ({ item, pinToTop, className }) => {
+export const ItemRow: React.FC<ItemRowProps> = ({
+  item,
+  pinToTop,
+  className,
+}) => {
   return (
     <IonRow className={className ? className : ""}>
       <IonCol size="3" className="location desktop">
@@ -105,5 +85,3 @@ const ItemRow: React.FC<ItemRowProps> = ({ item, pinToTop, className }) => {
     </IonRow>
   );
 };
-
-export default CountryTable;

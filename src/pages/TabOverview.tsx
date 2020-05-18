@@ -1,21 +1,21 @@
-import React, { UIEvent, useState, useEffect } from "react";
-import { inject, observer } from "mobx-react";
-import { IonPage, useIonViewDidEnter } from "@ionic/react";
+import React, { UIEvent, useState, useEffect } from 'react';
+import { inject, observer } from 'mobx-react';
+import { IonPage, useIonViewDidEnter } from '@ionic/react';
 
 // COMPONENTS
-import SummaryView from "../components/SummaryView";
-import CountryTable from "../components/CountryTable";
-import Header from "../components/Header";
-import Loading from "../components/Loading";
+import SummaryView from '../components/SummaryView';
+import CountryTable from '../components/CountryTable';
+import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 // MOBX STORE
-import { FirebaseStore, ByCountryData } from "../store/firebase/FirebaseStore";
-import { AppState } from "../store/app/AppState";
+import { FirebaseStore, ByCountryData } from '../store/firebase/FirebaseStore';
+import { AppState } from '../store/app/AppState';
 
 // HELPERS
-import { paginate } from "../utils/array";
+import { paginate } from '../utils/array';
 
-import "./TabOverview.css";
+import './TabOverview.css';
 
 type OverviewProps = {
   dataStore: FirebaseStore;
@@ -122,4 +122,4 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
   );
 };
 
-export default inject("dataStore", "appState")(observer(TabOverview));
+export default inject('dataStore', 'appState')(observer(TabOverview));

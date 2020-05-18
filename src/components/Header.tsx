@@ -1,14 +1,14 @@
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { IonHeader, useIonViewDidEnter, IonToggle } from "@ionic/react";
+import React from 'react';
+import { inject, observer } from 'mobx-react';
+import { IonHeader, useIonViewDidEnter, IonToggle } from '@ionic/react';
 
-import { ToggleChangeEventDetail } from "@ionic/core";
+import { ToggleChangeEventDetail } from '@ionic/core';
 
-import "./Header.css";
+import './Header.css';
 
-import SelectLanguage from "./SelectLanguage";
-import { FirebaseStore } from "../store/firebase/FirebaseStore";
-import { AppState, ViewMode } from "../store/app/AppState";
+import SelectLanguage from './SelectLanguage';
+import { FirebaseStore } from '../store/firebase/FirebaseStore';
+import { AppState, ViewMode } from '../store/app/AppState';
 
 type HeaderProps = {
   dataStore?: FirebaseStore;
@@ -50,4 +50,4 @@ const Header: React.FC<HeaderProps> = ({ dataStore, appState, title }) => {
   );
 };
 
-export default inject("dataStore", "appState")(observer(Header));
+export default inject('dataStore', 'appState')(observer(Header));

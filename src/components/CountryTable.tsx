@@ -1,21 +1,21 @@
-import React from "react";
-import { IonGrid, IonRow, IonCol } from "@ionic/react";
+import React from 'react';
+import { IonGrid, IonRow, IonCol } from '@ionic/react';
 
 // MOBX
-import { ByCountryData } from "../store/firebase/FirebaseStore";
-import { ViewMode } from "../store/app/AppState";
+import { ByCountryData } from '../store/firebase/FirebaseStore';
+import { ViewMode } from '../store/app/AppState';
 
 // COMPONENTS
 import {
   HeadRow as HeadRowMobile,
   ItemRow as BodyRowMobile,
-} from "./CountryTable.Mobile";
+} from './CountryTable.Mobile';
 import {
   HeadRow as HeadRowDesktop,
   ItemRow as BodyRowDesktop,
-} from "./CountryTable.Desktop";
+} from './CountryTable.Desktop';
 
-import "./CountryTable.css";
+import './CountryTable.css';
 
 export type CountryTableProps = {
   data: ByCountryData[];
@@ -70,11 +70,11 @@ const CountryTable: React.FC<CountryTableProps> = ({
       </IonRow>
       {headRow}
       {myCountryData
-        ? generateBodyRow(myCountryData, "country-row", true)
+        ? generateBodyRow(myCountryData, 'country-row', true)
         : null}
       {data &&
         data.map((item, index) => {
-          return generateBodyRow(item, "item-row", false);
+          return generateBodyRow(item, 'item-row', false);
         })}
     </IonGrid>
   );

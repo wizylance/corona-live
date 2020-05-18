@@ -1,9 +1,9 @@
-import { observable, action } from "mobx";
+import { observable, action } from 'mobx';
 // import { db } from '../components/firebase/firebase';
 
 export enum ViewMode {
-  DARK_MODE = "DARK_MODE",
-  LIGHT_MODE = "LIGHT_MODE",
+  DARK_MODE = 'DARK_MODE',
+  LIGHT_MODE = 'LIGHT_MODE',
 }
 
 export class AppState {

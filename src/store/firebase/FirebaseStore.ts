@@ -1,7 +1,7 @@
-import { observable, action, computed } from "mobx";
-import { persist } from "mobx-persist";
+import { observable, action, computed } from 'mobx';
+import { persist } from 'mobx-persist';
 // import { db } from '../components/firebase/firebase';
-import { db } from "../../services/firebase";
+import { db } from '../../services/firebase';
 
 export type SummaryData = {
   NewConfirmed: number;
@@ -35,11 +35,11 @@ export type ByCountries = {
 };
 
 export class FirebaseStore {
-  @persist("object")
+  @persist('object')
   @observable
   byCountries: ByCountries = {};
 
-  @persist("object")
+  @persist('object')
   @observable
   summaryData: SummaryData = {
     NewConfirmed: 0,
@@ -51,13 +51,13 @@ export class FirebaseStore {
   };
 
   @observable
-  myCountryCode: string = "VN";
+  myCountryCode: string = 'VN';
 
   fetchByCountries = function (this: FirebaseStore) {
     try {
       db.getAllCountries(this.setAllCountries);
     } catch (err) {
-      console.log("Failed to fetch countries data!", err);
+      console.log('Failed to fetch countries data!', err);
     }
   };
 
@@ -65,7 +65,7 @@ export class FirebaseStore {
     try {
       db.getDbGlobal(this.setSummaryData);
     } catch (err) {
-      console.log("Failed to fetch summary data!", err);
+      console.log('Failed to fetch summary data!', err);
     }
   };
 
@@ -73,7 +73,7 @@ export class FirebaseStore {
     try {
       db.syncDbGlobal(this.setSummaryData);
     } catch (err) {
-      console.log("Failed to fetch summary data!", err);
+      console.log('Failed to fetch summary data!', err);
     }
   };
 

@@ -1,15 +1,15 @@
-import React from "react";
-import CountryFlag from "react-country-flag";
-import { IonRow, IonCol, IonText } from "@ionic/react";
+import React from 'react';
+import CountryFlag from 'react-country-flag';
+import { IonRow, IonCol, IonText } from '@ionic/react';
 
 // MOBX
-import { ByCountryData } from "../store/firebase/FirebaseStore";
-import { ViewMode } from "../store/app/AppState";
+import { ByCountryData } from '../store/firebase/FirebaseStore';
+import { ViewMode } from '../store/app/AppState';
 
 // UTILS
-import { numberWithCommas } from "../utils/formatting";
+import { numberWithCommas } from '../utils/formatting';
 
-import "./CountryTable.css";
+import './CountryTable.css';
 
 type ItemRowProps = {
   item: ByCountryData;
@@ -43,13 +43,13 @@ export const ItemRow: React.FC<ItemRowProps> = ({
   className,
 }) => {
   return (
-    <IonRow className={className ? className : ""}>
+    <IonRow className={className ? className : ''}>
       <IonCol size="3" className="location">
         <CountryFlag
           countryCode={item.CountryCode}
           style={{
-            fontSize: pinToTop ? "2.5em" : "1.5em",
-            lineHeight: "1em",
+            fontSize: pinToTop ? '2.5em' : '1.5em',
+            lineHeight: '1em',
           }}
         />
         <p className="country-name">{item.Country}</p>

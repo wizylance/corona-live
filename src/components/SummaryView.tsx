@@ -1,10 +1,10 @@
-import React from "react";
-import { IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
-import { SummaryData } from "../store/firebase/FirebaseStore";
-import { numberWithCommas } from "../utils/formatting";
-import { ViewMode } from "../store/app/AppState";
+import React from 'react';
+import { IonGrid, IonRow, IonCol, IonText } from '@ionic/react';
+import { SummaryData } from '../store/firebase/FirebaseStore';
+import { numberWithCommas } from '../utils/formatting';
+import { ViewMode } from '../store/app/AppState';
 
-import "./SummaryView.css";
+import './SummaryView.css';
 
 type SummaryViewProps = {
   data: SummaryData;

@@ -1,7 +1,7 @@
-import { observable, action, computed } from "mobx";
-import { persist } from "mobx-persist";
+import { observable, action, computed } from 'mobx';
+import { persist } from 'mobx-persist';
 // import { db } from '../components/firebase/firebase';
-import { db } from "../components/firebase";
+import { db } from '../../services/firebase';
 
 export type SummaryData = {
   NewConfirmed: number;
@@ -35,11 +35,11 @@ export type ByCountries = {
 };
 
 export class FirebaseStore {
-  @persist("object")
+  @persist('object')
   @observable
   byCountries: ByCountries = {};
 
-  @persist("object")
+  @persist('object')
   @observable
   summaryData: SummaryData = {
     NewConfirmed: 0,
@@ -51,13 +51,13 @@ export class FirebaseStore {
   };
 
   @observable
-  myCountryCode: string = "VN";
+  myCountryCode: string = 'VN';
 
   fetchByCountries = function (this: FirebaseStore) {
     try {
       db.getAllCountries(this.setAllCountries);
     } catch (err) {
-      console.log("Failed to fetch contrys data!", err);
+      console.log('Failed to fetch countries data!', err);
     }
   };
 
@@ -65,7 +65,7 @@ export class FirebaseStore {
     try {
       db.getDbGlobal(this.setSummaryData);
     } catch (err) {
-      console.log("Failed to fetch summary data!", err);
+      console.log('Failed to fetch summary data!', err);
     }
   };
 
@@ -73,11 +73,15 @@ export class FirebaseStore {
     try {
       db.syncDbGlobal(this.setSummaryData);
     } catch (err) {
-      console.log("Failed to fetch summary data!", err);
+      console.log('Failed to fetch summary data!', err);
     }
   };
 
   @computed get sortedCountryData(): ByCountryData[] {
+    let countriesData: ByCountryData[] = [];
+    const byCountriesKeys = Object.keys(this.byCountries);
+    const byCountriesKeysLength = byCountriesKeys.length;
+
     const sortFunc = (first: ByCountryData, second: ByCountryData): number => {
       const diffConfirmed = first.TotalConfirmed - second.TotalConfirmed;
       if (diffConfirmed !== 0) return diffConfirmed;
@@ -89,10 +93,18 @@ export class FirebaseStore {
       if (first.Country < second.Country) return -1;
       return 0;
     };
-    let arrays = Object.keys(this.byCountries).map(
-      (key) => this.byCountries[key]
-    );
-    return arrays.sort(sortFunc).reverse();
+
+    for (let i = 0; i < byCountriesKeysLength; i++) {
+      if (byCountriesKeys[i] !== this.myCountryCode) {
+        countriesData.push(this.byCountries[byCountriesKeys[i]]);
+      }
+    }
+
+    return countriesData.sort(sortFunc).reverse();
+  }
+
+  @computed get myCountryData(): ByCountryData {
+    return this.byCountries[this.myCountryCode];
   }
 
   @computed get shortCountryData(): ByShortCountryData[] {

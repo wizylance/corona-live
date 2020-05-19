@@ -1,0 +1,10 @@
+.app-style {
+  --ion-background-color: #ffffff;
+  --ion-border-color: #ffffff;
+}
+
+.app-style.DARK_MODE {
+  color: #ffffff;
+  --ion-background-color: #000000;
+  --ion-border-color: #000000;
+}

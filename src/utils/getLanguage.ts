@@ -1,8 +1,8 @@
 export function getLanguage(countryCode: string): string {
   switch (countryCode) {
-    case "VN":
-      return "VN";
+    case 'VN':
+      return 'VN';
     default:
-      return "US";
+      return 'US';
   }
 }

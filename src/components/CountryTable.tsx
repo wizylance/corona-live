@@ -1,96 +1,82 @@
-import React from "react";
-import CountryFlag from "react-country-flag";
-import { IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
-import { ByCountryData } from "../services/FirebaseService";
-import { numberWithCommas } from "../utils/formatting";
-import "./CountryTable.css";
+import React from 'react';
+import { IonGrid, IonRow, IonCol } from '@ionic/react';
 
-type CountryTableProps = {
+// MOBX
+import { ByCountryData } from '../store/firebase/FirebaseStore';
+import { ViewMode } from '../store/app/AppState';
+
+// COMPONENTS
+import {
+  HeadRow as HeadRowMobile,
+  ItemRow as BodyRowMobile,
+} from './CountryTable.Mobile';
+import {
+  HeadRow as HeadRowDesktop,
+  ItemRow as BodyRowDesktop,
+} from './CountryTable.Desktop';
+
+import './CountryTable.css';
+
+export type CountryTableProps = {
   data: ByCountryData[];
-  myCountryCode: string;
+  viewMode: ViewMode;
+  myCountryData: ByCountryData;
 };
 
-const CountryTable: React.FC<CountryTableProps> = ({ data, myCountryCode }) => {
+const CountryTable: React.FC<CountryTableProps> = ({
+  data,
+  viewMode,
+  myCountryData,
+}) => {
+  let headRow: JSX.Element;
+
+  if (window.innerWidth <= 700) {
+    headRow = <HeadRowMobile viewMode={viewMode} />;
+  } else {
+    headRow = <HeadRowDesktop viewMode={viewMode} />;
+  }
+
+  const itemProps = (
+    item: ByCountryData,
+    className: string,
+    pinToTop: boolean
+  ) => {
+    return {
+      className: `${className} ${viewMode}`,
+      key: item.CountryCode,
+      item: item,
+      pinToTop: pinToTop,
+    };
+  };
+
+  const generateBodyRow = (
+    item: ByCountryData,
+    className: string,
+    pinToTop: boolean
+  ): JSX.Element => {
+    if (window.innerWidth <= 700) {
+      return <BodyRowMobile {...itemProps(item, className, pinToTop)} />;
+    }
+
+    return <BodyRowDesktop {...itemProps(item, className, pinToTop)} />;
+  };
+
   return (
     <IonGrid className="table-grid">
-      <IonRow className="title-row">
+      <IonRow className={`title-row country-title ${viewMode}`}>
         <IonCol>
-          <div className="ion-text-center">
-            <h2>By Countries</h2>
-          </div>
+          <div className="ion-text-center">By Countries</div>
         </IonCol>
       </IonRow>
-      <HeadRow />
+      {headRow}
+      {myCountryData
+        ? generateBodyRow(myCountryData, 'country-row', true)
+        : null}
       {data &&
-        data.map((item) => {
-          const isUserCountry = item && item.CountryCode === myCountryCode;
-          return (
-            <ItemRow
-              className={isUserCountry ? "country-row" : "item-row"}
-              key={item.CountryCode}
-              item={item}
-              pinToTop={isUserCountry}
-            />
-          );
+        data.map((item, index) => {
+          return generateBodyRow(item, 'item-row', false);
         })}
     </IonGrid>
-  );
-};
-
-const HeadRow: React.FC = () => (
-  <IonRow className="head-row">
-    <IonCol size="3">Location</IonCol>
-    <IonCol>Confirmed</IonCol>
-    <IonCol>Dead</IonCol>
-    <IonCol>Recovered</IonCol>
-    <IonCol>C Today</IonCol>
-    <IonCol>D Today</IonCol>
-    <IonCol>R Today</IonCol>
-  </IonRow>
-);
-
-type ItemRowProps = {
-  item: ByCountryData;
-  pinToTop: boolean;
-  className: string;
-};
-
-const ItemRow: React.FC<ItemRowProps> = ({ item, pinToTop, className }) => {
-  return (
-    <IonRow className={className ? className : ""}>
-      <IonCol size="3">
-        <CountryFlag
-          countryCode={item.CountryCode}
-          style={{
-            fontSize: pinToTop ? "4em" : "2.5em",
-            lineHeight: "1em",
-          }}
-        />
-        {item.Country}
-      </IonCol>
-      <IonCol>
-        <IonText color="warning">
-          {numberWithCommas(item.TotalConfirmed)}
-        </IonText>
-      </IonCol>
-      <IonCol>
-        <IonText color="danger">{numberWithCommas(item.TotalDeaths)}</IonText>
-      </IonCol>
-      <IonCol>
-        <IonText color="success">
-          {numberWithCommas(item.TotalRecovered)}
-        </IonText>
-      </IonCol>
-      <IonCol>
-        <IonText color="warning">{numberWithCommas(item.NewConfirmed)}</IonText>
-      </IonCol>
-      <IonCol>
-        <IonText color="danger">{numberWithCommas(item.NewDeaths)}</IonText>
-      </IonCol>
-      <IonCol>
-        <IonText color="success">{numberWithCommas(item.NewRecovered)}</IonText>
-      </IonCol>
-    </IonRow>
   );
 };
 

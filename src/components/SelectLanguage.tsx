@@ -1,9 +1,9 @@
-import React from "react";
-import { IonSelect, IonSelectOption } from "@ionic/react";
-import CountryFlag from "react-country-flag";
-import { ByShortCountryData } from "../services/FirebaseService";
+import React from 'react';
+import { IonSelect, IonSelectOption } from '@ionic/react';
+import CountryFlag from 'react-country-flag';
+import { ByShortCountryData } from '../store/firebase/FirebaseStore';
 
-import "./SelectLanguage.css";
+import './SelectLanguage.css';
 
 type SelectLanguageProps = {
   myCountryCode: string;

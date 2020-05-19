@@ -11,18 +11,103 @@
 
 .table-grid > .item-row {
   align-items: center;
-  order: 2;
 }
 
 .table-grid > .head-row,
 .table-grid > .title-row {
   align-items: center;
-  order: 0;
+}
+
+.table-grid > .head-row.desktop {
+  margin-bottom: 10px;
+}
+
+.table-grid > .head-row.desktop.LIGHT_MODE > .location,
+.table-grid > .head-row.desktop.LIGHT_MODE > .head-data > p,
+.table-grid > .head-row.desktop.DARK_MODE > .location,
+.table-grid > .head-row.desktop.DARK_MODE > .head-data > p {
+  font-size: 15px;
+}
+
+.table-grid > .title-row.country-title {
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.table-grid > .title-row.country-title.DARK_MODE {
+  color: #ffffff;
+}
+
+.table-grid > .title-row.country-title.LIGHT_MODE {
+  color: #000000;
+}
+
+.table-grid > .head-row > .location,
+.table-grid > .title-row > .location {
+  min-width: 110px;
+}
+
+.table-grid > .head-row > .head-data > p:first-child {
+  margin-bottom: 0px;
+}
+
+.table-grid > .head-row > .head-data > p:last-child {
+  margin-top: 3px;
+}
+
+.table-grid > .head-row.LIGHT_MODE > .location,
+.table-grid > .head-row.LIGHT_MODE > .head-data > p,
+.table-grid > .head-row.DARK_MODE > .location,
+.table-grid > .head-row.DARK_MODE > .head-data > p {
+  font-size: 12px;
+}
+
+.table-grid > .item-row.LIGHT_MODE > .location,
+.table-grid > .country-row.LIGHT_MODE > .location,
+.table-grid > .head-row.LIGHT_MODE > .location,
+.table-grid > .head-row.LIGHT_MODE > .head-data {
+  color: #000000;
+}
+
+.table-grid > .item-row.DARK_MODE > .location,
+.table-grid > .country-row.DARK_MODE > .location,
+.table-grid > .head-row.DARK_MODE > .location,
+.table-grid > .head-row.DARK_MODE > .head-data {
+  color: #ffffff;
+}
+
+.table-grid > .head-row > .head-data,
+.table-grid > .country-row > .data,
+.table-grid > .item-row > .data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.table-grid > .country-row > .data > ion-text,
+.table-grid > .item-row > .data > ion-text {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.table-grid > .country-row > .location > .country-name,
+.table-grid > .item-row > .location > .country-name {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.table-grid > .country-row > .location.desktop > .country-name,
+.table-grid > .item-row > .location.desktop > .country-name {
+  margin: 0;
+  display: inline;
+  text-transform: uppercase;
+  margin-left: 5px;
 }
 
 .table-grid > .country-row {
   align-items: center;
-  order: 1;
   border: 1px solid #333;
 }
 .table-grid > .country-row > icon-col::first-child > span {

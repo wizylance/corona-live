@@ -1,4 +1,4 @@
-import React, { UIEvent, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IonPage, useIonViewDidEnter } from '@ionic/react';
 
@@ -6,7 +6,7 @@ import { IonPage, useIonViewDidEnter } from '@ionic/react';
 import SummaryView from '../components/SummaryView';
 import CountryTable from '../components/CountryTable';
 import Header from '../components/Header';
-import Loading from '../components/Loading';
+import Pagination from '@material-ui/lab/Pagination';
 
 // MOBX STORE
 import { FirebaseStore, ByCountryData } from '../store/firebase/FirebaseStore';
@@ -26,17 +26,15 @@ type IState = {
   countriesData: ByCountryData[];
   pageSize: number;
   currentPage: number;
-  showLoading: boolean;
+  pages: number;
 };
 
 const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
-  let timeOut: NodeJS.Timer;
-
   const [localData, setLocalData] = useState<IState>({
     countriesData: [],
     pageSize: 20,
     currentPage: 1,
-    showLoading: false,
+    pages: 1,
   });
 
   const { summaryData, sortedCountryData, myCountryData } = dataStore;
@@ -52,70 +50,52 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
       localData.pageSize,
       localData.currentPage
     );
+    const pages = Math.ceil(sortedCountryData.length / localData.pageSize);
 
-    setLocalData({ ...localData, countriesData: paginatedData });
+    setLocalData({ ...localData, countriesData: paginatedData, pages: pages });
   }
 
-  const handleScroll = (v: UIEvent<HTMLDivElement>): void => {
-    const target: Partial<HTMLDivElement> = v.target;
-
-    const reachedBottom =
-      target.scrollTop! + target.offsetHeight! === target.scrollHeight!;
-    const reachedMaxData =
-      localData.countriesData.length === sortedCountryData.length;
-
-    if (reachedBottom && !localData.showLoading && !reachedMaxData) {
-      setLocalData({ ...localData, showLoading: true });
-    }
-
-    v.preventDefault();
-  };
-
-  if (localData.showLoading) {
-    const currentCountriesData = localData.countriesData;
-    const nextPage = ++localData.currentPage;
+  const handleChangePagination = (event: any, page: number) => {
     const paginatedData = paginate<ByCountryData>(
       sortedCountryData,
       localData.pageSize,
-      nextPage
+      page
     );
 
-    const newCountriesData = [...currentCountriesData, ...paginatedData];
-
-    timeOut = setTimeout(() => {
-      setLocalData({
-        ...localData,
-        currentPage: nextPage,
-        countriesData: newCountriesData,
-        showLoading: false,
-      });
-    }, 1000);
-  }
-
-  useEffect(() => {
-    return () => {
-      if (timeOut) {
-        clearTimeout(timeOut);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setLocalData({
+      ...localData,
+      countriesData: paginatedData,
+      currentPage: page,
+    });
+  };
 
   return (
     <IonPage>
       <Header title="COVID-19" />
-      <div
-        className={`tab-overview content ${appState.viewMode}`}
-        onScroll={handleScroll}
-      >
+      <div className={`tab-overview content ${appState.viewMode}`}>
         <SummaryView data={summaryData} viewMode={appState.viewMode} />
         <CountryTable
           data={localData.countriesData}
           viewMode={appState.viewMode}
           myCountryData={myCountryData}
         />
-        <div className="loading-wrapper">
-          {localData.showLoading ? <Loading /> : null}
+        <Pagination
+          className={`custom-pagination ${appState.viewMode}`}
+          count={localData.pages}
+          defaultPage={1}
+          color="primary"
+          onChange={handleChangePagination}
+        />
+        <div className={`about-us ${appState.viewMode}`}>
+          <p className="about-us title">ABOUT US</p>
+          <p className="about-us first-params">
+            Wizy helps develop digital business more efficiently, powered by
+            Vietnamese digital top talents.
+          </p>
+          <p className="about-us second-params">
+            We focus on Web Development, App Development and UI Design with
+            highly proficiency
+          </p>
         </div>
       </div>
     </IonPage>

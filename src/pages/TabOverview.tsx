@@ -71,7 +71,7 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
 
   return (
     <IonPage>
-      <Header title="COVID-19" />
+      <Header title="COVID-19 @WIZYLANCE" />
       <div className={`tab-overview content ${appState.viewMode}`}>
         <SummaryView data={summaryData} viewMode={appState.viewMode} />
         <CountryTable
@@ -87,14 +87,13 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
           onChange={handleChangePagination}
         />
         <div className={`about-us ${appState.viewMode}`}>
-          <p className="about-us title">ABOUT US</p>
+          <p className="about-us title"><a href='https://wizylance.com/' target='_blank'>ABOUT US</a></p>
           <p className="about-us first-params">
-            Wizy helps develop digital business more efficiently, powered by
-            Vietnamese digital top talents.
+            WizyLance is an exclusive network of the top freelance software developers, designers, testers, business analyst, and project managers in Vietnam.
           </p>
           <p className="about-us second-params">
             We focus on Web Development, App Development and UI Design with
-            highly proficiency
+            highly proficiency.
           </p>
         </div>
       </div>

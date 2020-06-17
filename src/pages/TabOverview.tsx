@@ -32,7 +32,7 @@ type IState = {
 const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
   const [localData, setLocalData] = useState<IState>({
     countriesData: [],
-    pageSize: 20,
+    pageSize: 100,
     currentPage: 1,
     pages: 1,
   });

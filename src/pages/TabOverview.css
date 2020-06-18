@@ -17,3 +17,61 @@
   padding: 40px;
   position: relative;
 }
+
+.custom-pagination {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-pagination.DARK_MODE .MuiPagination-ul li button,
+.custom-pagination.DARK_MODE .MuiPagination-ul li div {
+  color: white;
+}
+
+.custom-pagination.LIGHT_MODE .MuiPagination-ul li button,
+.custom-pagination.LIGHT_MODE .MuiPagination-ul li div {
+  color: black;
+}
+
+.custom-pagination.LIGHT_MODE .MuiPagination-ul li button.Mui-selected {
+  color: white;
+}
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-us.LIGHT_MODE {
+  color: black;
+}
+
+.about-us.DARK_MODE {
+  color: white;
+}
+
+.about-us p {
+  text-align: center;
+  width: 80%;
+}
+
+.about-us.title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.about-us.first-params {
+  margin-bottom: 0;
+  line-height: 23px;
+}
+
+.about-us.second-params {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  line-height: 23px;
+}

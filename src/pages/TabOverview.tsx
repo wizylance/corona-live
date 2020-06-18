@@ -87,7 +87,7 @@ const TabOverview: React.FC<OverviewProps> = ({ dataStore, appState }) => {
           onChange={handleChangePagination}
         />
         <div className={`about-us ${appState.viewMode}`}>
-          <p className="about-us title"><a href='https://wizylance.com/' target='_blank'>WIZYLANCE.COM</a></p>
+          <p className="about-us title"><a href='https://wizylance.com/'>WIZYLANCE.COM</a></p>
           <p className="about-us title">ABOUT US</p>
           <p className="about-us first-params">
             WizyLance is an exclusive network of the top freelance software developers, designers, testers, business analyst, and project managers in Vietnam.
